@@ -4,7 +4,7 @@ let originalContent // Zum Speichern des ursprünglichen Inhalts
 
 function bionicRead(text) {
   // Hervorheben der ersten Hälfte (oder mehr) der Buchstaben jedes Wortsegments
-  return text.replace(/(^|\s|[\.,;!?()])([a-zA-ZäöüÄÖÜß]+)(?=\s|[\.,;!?()]|$)/g, (match, prefix, word) => {
+  return text.replace(/(^|\s|[\.,;!?()"])([a-zA-ZäöüÄÖÜß]+)(?=\s|[\.,;!?()"]|$)/g, (match, prefix, word) => {
     if (!isNaN(word)) {
       return match;
     }
