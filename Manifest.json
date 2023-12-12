@@ -1,0 +1,13 @@
+{
+	"manifest_version": 3,
+	"name": "BIONIC READING EXTREME",
+	"version": "0.122967"	,
+	"content_scripts":[{
+		"run_at": "document_idle",
+		"all_frames": true,
+		"matches": [
+			"<all_urls>"
+		],
+		"js": ["content.js"]
+	}]
+}
