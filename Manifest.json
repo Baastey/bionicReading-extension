@@ -4,7 +4,7 @@
 	"version": "0.122967"	,
 	"content_scripts":[{
 		"run_at": "document_idle",
-		"all_frames": true,
+		"all_frames": false,
 		"matches": [
 			"<all_urls>"
 		],

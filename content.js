@@ -1,6 +1,6 @@
 let isBionicReadingActive = false;
 let interval;
-let originalContent = new Map(); // Zum Speichern des ursprünglichen Inhalts
+let originalContent // Zum Speichern des ursprünglichen Inhalts
 
 function bionicRead(text) {
   // Hervorheben der ersten Hälfte (oder mehr) der Buchstaben jedes Wortsegments
@@ -13,11 +13,8 @@ function bionicRead(text) {
   });
 }
 
-function saveOriginalContent(target = document.body) {
-  originalContent.clear();
-  target.querySelectorAll("*:not(script):not(noscript):not(style)").forEach((element) => {
-    originalContent.set(element, element.innerHTML);
-  });
+function saveOriginalContent() {
+  originalContent = document.body.innerHTML
 }
 
 function applyBionicReading(target = document.body) {
@@ -34,18 +31,15 @@ function applyBionicReading(target = document.body) {
 }
 
 function resetBionicReading() {
-  originalContent.forEach((html, element) => {
-    element.innerHTML = html;
-  });
-  originalContent.clear();
+  document.body.innerHTML = originalContent
+  createPopupSwitch()
 }
 
 function toggleBionicReading() {
   isBionicReadingActive = !isBionicReadingActive;
+  const bionicSwitchButton = document.getElementById('bionic-switch-button')
   if (isBionicReadingActive) {
-    if (!originalContent.size) {
-      saveOriginalContent();
-    }
+    bionicSwitchButton.style.backgroundColor = 'green'
     interval = setInterval(() => applyBionicReading(document.body), 500);
   } else {
     clearInterval(interval);
@@ -54,12 +48,13 @@ function toggleBionicReading() {
 }
 
 function createPopupSwitch() {
+  saveOriginalContent()
   const switchContainer = document.createElement('div');
   switchContainer.id = 'bionic-switch-container';
   switchContainer.style.position = 'fixed';
   switchContainer.style.bottom = '20px';
   switchContainer.style.right = '20px';
-  switchContainer.style.zIndex = '1000';
+  switchContainer.style.zIndex = '10000';
   switchContainer.style.backgroundColor = 'white';
   switchContainer.style.border = '1px solid black';
   switchContainer.style.padding = '10px';
@@ -67,10 +62,12 @@ function createPopupSwitch() {
   switchContainer.style.boxShadow = '0px 0px 10px rgba(0, 0, 0, 0.5)';
 
   const switchButton = document.createElement('button');
+  switchButton.id = 'bionic-switch-button'
   switchButton.innerText = 'Toggle Bionic Reading';
+  switchButton.style.color = 'white'
   switchButton.onclick = toggleBionicReading;
+  switchButton.style.backgroundColor = 'red'
   switchContainer.appendChild(switchButton);
   document.body.appendChild(switchContainer);
 }
-
 window.addEventListener('load', createPopupSwitch);
