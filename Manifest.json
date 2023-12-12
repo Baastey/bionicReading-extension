@@ -1,7 +1,8 @@
 {
 	"manifest_version": 3,
 	"name": "BIONIC READING EXTREME",
-	"version": "0.122967"	,
+	"version": "12.12"	,
+	"description": "Wendet Bionic Reading nach den neusten Standards auf Websites an.",
 	"content_scripts":[{
 		"run_at": "document_idle",
 		"all_frames": false,
